@@ -8,7 +8,15 @@ import org.springframework.util.StringUtils;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
+/**
+ * html 텍스트 분석기
+ *
+ * @author rndlf104@gmail.com
+ * @since 2022.06.11
+ */
 @Component
 public class HtmlAnalyzer {
 
@@ -39,7 +47,7 @@ public class HtmlAnalyzer {
 
         // 텍스트 파싱
         String mergedText = parse(originHtml.toString());
-        if(StringUtils.isEmpty(mergedText)) {
+        if (StringUtils.isEmpty(mergedText)) {
             return null;
         }
 
@@ -47,19 +55,26 @@ public class HtmlAnalyzer {
         return result;
     }
 
+    /**
+     * 묶음단위로 몫과 나머지 구하기
+     *
+     * @param mergedText
+     * @param outputGroupUnit
+     * @return 몫과 나머지가 들어있는 map
+     */
     public HashMap<String, Object> calculateGroupingUnit(String mergedText, int outputGroupUnit) {
         HashMap<String, Object> result = new HashMap<>();
         int quotientLength = mergedText.length() - mergedText.length() % outputGroupUnit;
         result.put("quotient", mergedText.substring(0, quotientLength));
         result.put("remainder", mergedText.substring(quotientLength));
-        return  result;
+        return result;
     }
 
     /**
      * 추출된 텍스트 파싱하기
      *
-     * @param originHtml
-     * @return
+     * @param originHtml html 오리지널 텍스트
+     * @return 요구사항대로 정렮 및 병합된 문자열
      */
     public String parse(String originHtml) {
         // Empty 처리
@@ -89,11 +104,17 @@ public class HtmlAnalyzer {
     }
 
     /**
-     * @param sortedAlphabet
-     * @param sortedNumber
-     * @return
+     * 알파벳, 숫자 문자열을 병합하기
+     *
+     * @param sortedAlphabet 대소문자 구분 AaBb.. 형태 정렬된 문자열
+     * @param sortedNumber 숫자 오름차순 문자열
+     * @return 병합된 문자열
      */
     public String merge(String sortedAlphabet, String sortedNumber) {
-        return "";
+        return IntStream.range(0, Math.max(sortedAlphabet.length(), sortedNumber.length())).boxed()
+                .flatMap(i -> Stream.concat(
+                i < sortedAlphabet.length() ? Stream.of(sortedAlphabet.charAt(i)) : Stream.empty(),
+                i < sortedNumber.length() ? Stream.of(sortedNumber.charAt(i)) : Stream.empty()))
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append).toString();
     }
 }

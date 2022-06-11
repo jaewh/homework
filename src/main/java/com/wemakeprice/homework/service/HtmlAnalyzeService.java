@@ -44,7 +44,7 @@ public class HtmlAnalyzeService {
         if (!CollectionUtils.isEmpty(result)) {
             return result;
         } else {
-            throw new RuntimeException();
+            throw new RuntimeException("parse failed!!!");
         }
     }
 }

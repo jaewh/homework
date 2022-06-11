@@ -42,8 +42,6 @@ public class HtmlAnalyzeControllerTest {
                         .param("outputGroupUnit", "3")
                 )
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.code").value(200))
-                .andExpect(jsonPath("$.message").value("성공"))
                 .andDo(print());
     }
 
@@ -54,9 +52,7 @@ public class HtmlAnalyzeControllerTest {
                         .param("analyzeType", "WHLTXT")
                         .param("outputGroupUnit", "4")
                 )
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.code").value(200))
-                .andExpect(jsonPath("$.message").value("성공"))
+                .andExpect(status().is5xxServerError())
                 .andDo(print());
     }
 
@@ -67,9 +63,7 @@ public class HtmlAnalyzeControllerTest {
                         .param("analyzeType", "WHLTXT")
                         .param("outputGroupUnit", "4")
                 )
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.code").value(200))
-                .andExpect(jsonPath("$.message").value("성공"))
+                .andExpect(status().is5xxServerError())
                 .andDo(print());
     }
 
@@ -80,9 +74,7 @@ public class HtmlAnalyzeControllerTest {
                         .param("analyzeType", "WHLTXT")
                         .param("outputGroupUnit", "4")
                 )
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.code").value(200))
-                .andExpect(jsonPath("$.message").value("성공"))
+                .andExpect(status().is5xxServerError())
                 .andDo(print());
     }
 
@@ -93,9 +85,7 @@ public class HtmlAnalyzeControllerTest {
                         .param("analyzeType", "WHLTXT")
                         .param("outputGroupUnit", "4")
                 )
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.code").value(200))
-                .andExpect(jsonPath("$.message").value("성공"))
+                .andExpect(status().is5xxServerError())
                 .andDo(print());
     }
 
@@ -106,9 +96,7 @@ public class HtmlAnalyzeControllerTest {
                         .param("analyzeType", "WHLTXT")
                         .param("outputGroupUnit", "-1")
                 )
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.code").value(200))
-                .andExpect(jsonPath("$.message").value("성공"))
+                .andExpect(status().is5xxServerError())
                 .andDo(print());
     }
 }

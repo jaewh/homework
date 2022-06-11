@@ -17,9 +17,13 @@ import java.io.IOException;
 @ControllerAdvice
 @Slf4j
 public class BaseControllerAdviser {
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Object> jsoupException(Exception exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
-    @ExceptionHandler(IOException.class)
-    public ResponseEntity<Object> jsoupException(IOException exception) {
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<Object> parseException(RuntimeException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
