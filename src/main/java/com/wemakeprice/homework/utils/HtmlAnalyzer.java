@@ -107,14 +107,14 @@ public class HtmlAnalyzer {
      * 알파벳, 숫자 문자열을 병합하기
      *
      * @param sortedAlphabet 대소문자 구분 AaBb.. 형태 정렬된 문자열
-     * @param sortedNumber 숫자 오름차순 문자열
+     * @param sortedNumber   숫자 오름차순 문자열
      * @return 병합된 문자열
      */
     public String merge(String sortedAlphabet, String sortedNumber) {
         return IntStream.range(0, Math.max(sortedAlphabet.length(), sortedNumber.length())).boxed()
                 .flatMap(i -> Stream.concat(
-                i < sortedAlphabet.length() ? Stream.of(sortedAlphabet.charAt(i)) : Stream.empty(),
-                i < sortedNumber.length() ? Stream.of(sortedNumber.charAt(i)) : Stream.empty()))
+                        i < sortedAlphabet.length() ? Stream.of(sortedAlphabet.charAt(i)) : Stream.empty(),
+                        i < sortedNumber.length() ? Stream.of(sortedNumber.charAt(i)) : Stream.empty()))
                 .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append).toString();
     }
 }

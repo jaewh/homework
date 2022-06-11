@@ -11,7 +11,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.util.CollectionUtils;
 
 import java.util.HashMap;
 
@@ -41,7 +40,7 @@ public class HtmlAnalyzerTest {
         answer.put("quotient", "A0a1a2a3B4b5b6bccccccccDDDDDdd");
         answer.put("remainder", "");
 
-        HashMap<String, Object> result =  htmlAnalyzer.calculateGroupingUnit("A0a1a2a3B4b5b6bccccccccDDDDDdd", 3);
+        HashMap<String, Object> result = htmlAnalyzer.calculateGroupingUnit("A0a1a2a3B4b5b6bccccccccDDDDDdd", 3);
         log.info(result.toString());
         Assert.assertEquals(answer, result);
     }

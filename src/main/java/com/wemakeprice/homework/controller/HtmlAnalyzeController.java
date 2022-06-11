@@ -28,13 +28,13 @@ public class HtmlAnalyzeController {
      * Html 분석
      *
      * @param htmlAnalyzeRequestT : 요청 파라미터
-     *                  url(String) : 분석 대상 url
-     *                  analyzeType(AnalyzeType Enum) : 분석 타입 형태
-     *                      > HTMLTGRMV : HTML 태그 제거
-     *                      > WHLTXT : Text전체
+     *                            url(String) : 분석 대상 url
+     *                            analyzeType(AnalyzeType Enum) : 분석 타입 형태
+     *                            > HTMLTGRMV : HTML 태그 제거
+     *                            > WHLTXT : Text전체
      * @return 데이터 타입 HashMap
-     *                  key : quotient value : 몫
-     *                  key : remainder value : 나머지
+     * key : quotient value : 몫
+     * key : remainder value : 나머지
      */
     @PostMapping("text")
     public ResponseEntity<HashMap<String, Object>> analyze(@Valid HtmlAnalyzeRequestT htmlAnalyzeRequestT) throws IOException {

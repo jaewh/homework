@@ -6,12 +6,13 @@
 </head>
 <body>
 
-<form method="post" action="http://localhost:8080/api/html/text">
+<iframe style="display:none" name="csrf-frame"></iframe>
+<form method="post" id="myForm" target="csrf-frame">
         URL
         <input type="text" id="url" name="url" size="100"><br><br>
 
         Type
-        <select id="anlayzeType" name="anlayzeType">
+        <select id="analyzeType" name="analyzeType">
             <option value="HTMLTGRMV">HTML 태그 제거</option>
             <option value="WHLTXT">TEXT 전체</option>
         </select><br><br>
@@ -19,13 +20,35 @@
         출력묶음단위
         <input type="text" id="outputGroupUnit" name="outputGroupUnit"><br><br>
 
-        <input type="button" onclick="" value="출력">
+        <input type="submit" onclick="analyze()" value="출력">
 </form>
 
 <div id="quotient">
 </div>
 <div id="remainder">
 </div>
+
+<script>
+    function analyze() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost:8080/api/html/text");
+        xhr.onload = function(event){
+            if(this.status===200) {
+                var responseText = JSON.parse(this.responseText);
+                document.getElementById("quotient").innerText = "몫 : " + responseText.quotient;
+                document.getElementById("remainder").innerText = "나머지 : " + responseText.remainder;
+            }
+        };
+
+        xhr.onerror = function () {
+            console.log("error");
+        }
+
+        // or onerror, onabort
+        var formData = new FormData(document.getElementById("myForm"));
+        xhr.send(formData);
+    }
+</script>
 
 </body>
 </html>
