@@ -6,6 +6,7 @@ import lombok.ToString;
 import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 /**
  * Html 분석 요청 파라미터 모델
@@ -21,6 +22,7 @@ public class HtmlAnalyzeRequestT {
     @URL
     private String url;
 
+    @NotNull
     private AnalyzeType analyzeType;
 
     @Min(1)

@@ -1,11 +1,13 @@
 package com.wemakeprice.homework.service;
 
 import com.wemakeprice.homework.domain.HtmlAnalyzeRequestT;
+import com.wemakeprice.homework.utils.HtmlAnalyzer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -22,6 +24,7 @@ import java.util.HashMap;
 public class HtmlAnalyzeService {
 
     private static final int TIMEOUT = 5000;
+    private final HtmlAnalyzer htmlAnalyzer;
 
     /**
      * html 분석 서비스
@@ -37,7 +40,11 @@ public class HtmlAnalyzeService {
         Document document = Jsoup.connect(htmlAnalyzeRequestT.getUrl()).timeout(TIMEOUT).get();
 
         // 가져온 문서 파싱
-        HashMap<String, Object> result = new HashMap<>();
-        return result;
+        HashMap<String, Object> result = htmlAnalyzer.analyze(document, htmlAnalyzeRequestT);
+        if (!CollectionUtils.isEmpty(result)) {
+            return result;
+        } else {
+            throw new RuntimeException();
+        }
     }
 }
