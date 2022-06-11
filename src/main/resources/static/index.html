@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Homework</title>
+</head>
+<body>
+
+<form method="post" action="http://localhost:8080/api/html/text">
+        URL
+        <input type="text" id="url" name="url" size="100"><br><br>
+
+        Type
+        <select id="anlayzeType" name="anlayzeType">
+            <option value="HTMLTGRMV">HTML 태그 제거</option>
+            <option value="WHLTXT">TEXT 전체</option>
+        </select><br><br>
+
+        출력묶음단위
+        <input type="text" id="outputGroupUnit" name="outputGroupUnit"><br><br>
+
+        <input type="button" onclick="" value="출력">
+</form>
+
+<div id="quotient">
+</div>
+<div id="remainder">
+</div>
+
+</body>
+</html>
